@@ -32,7 +32,7 @@ Spring Boot是2014年单独分离出一个团队开发的基于Spring的一个�
 
 ### 修改pom.xml
 
-![1527996119529](D:\JY12\springboot\springboot\images\1527996119529.png)
+![1527996119529](images\1527996119529.png)
 
 
 
@@ -344,7 +344,7 @@ spring.servlet.multipart-org.springframework.boot.autoconfigure.web.servlet.Mult
 
 **-Ddebug=true**
 
-![1528005150163](D:\JY12\springboot\springboot\images\1528005150163.png)
+![1528005150163](images\1528005150163.png)
 
 启动的时候能看到类似如下的信息：
 
