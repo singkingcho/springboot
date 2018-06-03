@@ -691,7 +691,7 @@ spring-boot-devtools ，在pom.xml当中添加依赖
 </plugin>
 ```
 
-对于idea还要进行额外的设置：
+==对于idea还要进行额外的设置,修改这里的时候要注意去修改defautl settings否则很有可能无法生效，因为没有修改到本工程，并且修改之后最好重启idea==：
 
 ![1528008768519](images/1528008768519.png)
 
