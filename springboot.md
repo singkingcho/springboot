@@ -439,52 +439,8 @@ spring.servlet.multipart-org.springframework.boot.autoconfigure.web.servlet.Mult
 						</execution>
 					</executions>
 				</plugin>
-				<plugin>
-					<groupId>org.apache.maven.plugins</groupId>
-					<artifactId>maven-compiler-plugin</artifactId>
-					<configuration>
-						<parameters>true</parameters>
-					</configuration>
-				</plugin>
-				<plugin>
-					<groupId>org.apache.maven.plugins</groupId>
-					<artifactId>maven-failsafe-plugin</artifactId>
-					<executions>
-						<execution>
-							<goals>
-								<goal>integration-test</goal>
-								<goal>verify</goal>
-							</goals>
-						</execution>
-					</executions>
-					<configuration>
-						<classesDirectory>${project.build.outputDirectory}</classesDirectory>
-					</configuration>
-				</plugin>
-				<plugin>
-					<groupId>org.apache.maven.plugins</groupId>
-					<artifactId>maven-jar-plugin</artifactId>
-					<configuration>
-						<archive>
-							<manifest>
-								<mainClass>${start-class}</mainClass>
-								<addDefaultImplementationEntries>true</addDefaultImplementationEntries>
-							</manifest>
-						</archive>
-					</configuration>
-				</plugin>
-				<plugin>
-					<groupId>org.apache.maven.plugins</groupId>
-					<artifactId>maven-war-plugin</artifactId>
-					<configuration>
-						<archive>
-							<manifest>
-								<mainClass>${start-class}</mainClass>
-								<addDefaultImplementationEntries>true</addDefaultImplementationEntries>
-							</manifest>
-						</archive>
-					</configuration>
-				</plugin>
+			
+
 				<plugin>
 					<groupId>org.codehaus.mojo</groupId>
 					<artifactId>exec-maven-plugin</artifactId>
@@ -582,135 +538,7 @@ spring.servlet.multipart-org.springframework.boot.autoconfigure.web.servlet.Mult
 									<transformer
 										implementation="org.apache.maven.plugins.shade.resource.ServicesResourceTransformer" />
 									<transformer
-										implementation="org.apache.maven.plugins.shade.resource.ManifestResourceTransformer">
-										<mainClass>${start-class}</mainClass>
-									</transformer>
-								</transformers>
-							</configuration>
-						</execution>
-					</executions>
-				</plugin>
-				<!--This plugin's configuration is used to store Eclipse m2e settings
-					only. It has no influence on the Maven build itself. -->
-				<plugin>
-					<groupId>org.eclipse.m2e</groupId>
-					<artifactId>lifecycle-mapping</artifactId>
-					<version>1.0.0</version>
-					<configuration>
-						<lifecycleMappingMetadata>
-							<pluginExecutions>
-								<pluginExecution>
-									<pluginExecutionFilter>
-										<groupId>
-											org.codehaus.mojo
-										</groupId>
-										<artifactId>
-											flatten-maven-plugin
-										</artifactId>
-										<versionRange>
-											[1.0.0,)
-										</versionRange>
-										<goals>
-											<goal>flatten</goal>
-										</goals>
-									</pluginExecutionFilter>
-									<action>
-										<ignore></ignore>
-									</action>
-								</pluginExecution>
-								<pluginExecution>
-									<pluginExecutionFilter>
-										<groupId>
-											org.apache.maven.plugins
-										</groupId>
-										<artifactId>
-											maven-checkstyle-plugin
-										</artifactId>
-										<versionRange>
-											[3.0.0,)
-										</versionRange>
-										<goals>
-											<goal>check</goal>
-										</goals>
-									</pluginExecutionFilter>
-									<action>
-										<ignore></ignore>
-									</action>
-								</pluginExecution>
-							</pluginExecutions>
-						</lifecycleMappingMetadata>
-					</configuration>
-				</plugin>
-			</plugins>
-		</pluginManagement>
-		<plugins>
-			<plugin>
-				<groupId>org.codehaus.mojo</groupId>
-				<artifactId>flatten-maven-plugin</artifactId>
-				<inherited>false</inherited>
-				<executions>
-					<execution>
-						<!-- Flatten and simplify our own POM for install/deploy -->
-						<id>flatten</id>
-						<phase>process-resources</phase>
-						<goals>
-							<goal>flatten</goal>
-						</goals>
-						<configuration>
-							<updatePomFile>true</updatePomFile>
-							<pomElements>
-								<parent>expand</parent>
-								<name>keep</name>
-								<description>keep</description>
-								<url>expand</url>
-								<properties>keep</properties>
-								<pluginManagement>keep</pluginManagement>
-								<dependencyManagement>keep</dependencyManagement>
-								<build>keep</build>
-							</pomElements>
-						</configuration>
-					</execution>
-					<execution>
-						<id>flatten-clean</id>
-						<phase>clean</phase>
-						<goals>
-							<goal>clean</goal>
-						</goals>
-					</execution>
-				</executions>
-			</plugin>
-			<plugin>
-				<groupId>org.codehaus.mojo</groupId>
-				<artifactId>xml-maven-plugin</artifactId>
-				<inherited>false</inherited>
-				<executions>
-					<execution>
-						<!-- Cleanup the flattened project POM -->
-						<id>post-process-flattened-pom</id>
-						<phase>process-resources</phase>
-						<goals>
-							<goal>transform</goal>
-						</goals>
-						<configuration>
-							<transformationSets>
-								<transformationSet>
-									<dir>${project.basedir}</dir>
-									<outputDir>${project.basedir}</outputDir>
-									<includes>.flattened-pom.xml</includes>
-									<stylesheet>src/main/xslt/post-process-flattened-pom.xsl</stylesheet>
-									<outputProperties>
-										<outputProperty>
-											<name>indent</name>
-											<value>yes</value>
-										</outputProperty>
-									</outputProperties>
-								</transformationSet>
-							</transformationSets>
-						</configuration>
-					</execution>
-				</executions>
-			</plugin>
-		</plugins>
+...
 	</build>
 </project>
 ```
@@ -855,7 +683,7 @@ spring.servlet.multipart-org.springframework.boot.autoconfigure.web.servlet.Mult
 
 
 
-
+![1528006687581](images/1528006687581.png)
 
 
 
