@@ -584,10 +584,7 @@ spring.servlet.multipart-org.springframework.boot.autoconfigure.web.servlet.Mult
 ### web模块
 
 ```xml
-<?xml version="1.0" encoding="UTF-8"?>
-<project xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd" xmlns="http://maven.apache.org/POM/4.0.0"
-    xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance">
-  <modelVersion>4.0.0</modelVersion>
+
   <parent>
     <groupId>org.springframework.boot</groupId>
     <artifactId>spring-boot-starters</artifactId>
@@ -639,25 +636,7 @@ spring.servlet.multipart-org.springframework.boot.autoconfigure.web.servlet.Mult
       <artifactId>spring-boot-starter-json</artifactId>
       <version>2.0.2.RELEASE</version>
       <scope>compile</scope>
-    </dependency>
-    <dependency>
-      <groupId>org.springframework.boot</groupId>
-      <artifactId>spring-boot-starter-tomcat</artifactId>
-      <version>2.0.2.RELEASE</version>
-      <scope>compile</scope>
-    </dependency>
-    <dependency>
-      <groupId>org.hibernate.validator</groupId>
-      <artifactId>hibernate-validator</artifactId>
-      <version>6.0.9.Final</version>
-      <scope>compile</scope>
-    </dependency>
-    <dependency>
-      <groupId>org.springframework</groupId>
-      <artifactId>spring-web</artifactId>
-      <version>5.0.6.RELEASE</version>
-      <scope>compile</scope>
-    </dependency>
+	...
     <dependency>
       <groupId>org.springframework</groupId>
       <artifactId>spring-webmvc</artifactId>
@@ -681,43 +660,219 @@ spring.servlet.multipart-org.springframework.boot.autoconfigure.web.servlet.Mult
 
 ## starter模板
 
+![1528007575101](images/1528007575101.png)
+
+通过starer模板我们可以看出，如果我们需要继承某项技术，直接引入对应的starer模块即可。
+
+接下来，我们介绍一个使用的工具，类似于热部署，当我们的代码发生改变的时候希望能够及时生效，如果你有等待一个人，哦不一个项目几分钟没反应的经历，你一定很喜欢下面的功能。
+
+## 开发者工具
+
+spring-boot-devtools ，在pom.xml当中添加依赖
+
+```xml
+<!--开发者工具-->
+<dependency>
+    <groupId>org.springframework.boot</groupId>
+    <artifactId>spring-boot-devtools</artifactId>
+    <optional>true</optional>
+</dependency>
+```
+
+在plugins立马添加plugin
+
+```xml
+<plugin>
+    <groupId>org.springframework.boot</groupId>
+    <artifactId>spring-boot-maven-plugin</artifactId>
+    <configuration>
+        <fork>true</fork><!-- 如果没有该项配置，肯呢个devtools不会起作用，即应用不会restart -->
+    </configuration>
+</plugin>
+```
+
+对于idea还要进行额外的设置：
+
+![1528008768519](images/1528008768519.png)
 
 
-![1528006687581](images/1528006687581.png)
+
+
+
+别急还有一步：
+
+ctrl + shift + alt + /
+
+![1528008811453](images/1528008811453.png)
 
 
 
 
 
+![1528008877384](images/1528008877384.png)
+
+
+
+这样你修改代码，基本上2-3秒就是有反应的了。
+
+当然这个开发工具还有很多细节都可以配置，目前我们先了解这么多够用了。
+
+试想一下以前我们开发web项目怎么做的呢？
+
+打一个war包，丢到tomcat，启动。
+
+看Spring Boot有多简单吧
+
+![1528009013170](images/1528009013170.png)
+
+
+
+在target下有
+
+![1528009127604](images/1528009127604.png)
+
+
+
+我们进入它的目录，然后执行命令即可。
+
+```bash
+java -jar springboot01-helloword-1.0-SNAPSHOT.jar
+```
+
+关闭这个窗口，项目就停掉了。
+
+### 项目根路径问问题
+
+我们访问项目的时候一直使用的就是/ ,并没有使用任何项目名，这里要注意，可不可以配置，肯定可以，暂时我们都以 /来玩，先别那么复杂。
+
+
+
+### tomcat去哪了
+
+对于SpringBoot而言，它已经帮助我们内置嵌入了Tomcat，所以我们无需关心这个问题了。
+
+当然你非要搞个war包像传统方式一样也是可以的。
+
+#### 修改pom.xml
+
+```xml
+<?xml version="1.0" encoding="UTF-8"?>
+<project xmlns="http://maven.apache.org/POM/4.0.0"
+         xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+         xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
+    <modelVersion>4.0.0</modelVersion>
+
+    <groupId>com.daodaofun</groupId>
+    <artifactId>springboot01-helloword</artifactId>
+    <version>1.0-SNAPSHOT</version>
+    <packaging>war</packaging>
+
+    <parent>
+        <groupId>org.springframework.boot</groupId>
+        <artifactId>spring-boot-starter-parent</artifactId>
+        <version>2.0.2.RELEASE</version>
+    </parent>
+    <dependencies>
+        <dependency>
+            <groupId>org.springframework.boot</groupId>
+            <artifactId>spring-boot-starter-web</artifactId>
+        </dependency>
+
+        <dependency>
+            <groupId>org.springframework.boot</groupId>
+            <artifactId>spring-boot-starter-tomcat</artifactId>
+            <!--范围声明为提供-->
+            <scope>provided</scope>
+        </dependency>
+
+        <!--添加servlet依赖-->
+        <dependency>
+            <groupId>javax.servlet</groupId>
+            <artifactId>javax.servlet-api</artifactId>
+            <version>3.1.0</version>
+            <scope>provided</scope>
+        </dependency>
+        <dependency>
+            <groupId>org.apache.tomcat</groupId>
+            <artifactId>tomcat-servlet-api</artifactId>
+            <version>8.0.36</version>
+            <scope>provided</scope>
+        </dependency>
+        <!--开发者工具-->
+        <dependency>
+            <groupId>org.springframework.boot</groupId>
+            <artifactId>spring-boot-devtools</artifactId>
+            <optional>true</optional>
+        </dependency>
+    </dependencies>
+
+    <build>
+
+        <plugins>
+            <plugin>
+                <groupId>org.springframework.boot</groupId>
+                <artifactId>spring-boot-maven-plugin</artifactId>
+            </plugin>
+            <plugin>
+                <groupId>org.springframework.boot</groupId>
+                <artifactId>spring-boot-maven-plugin</artifactId>
+                <configuration>
+                    <fork>true</fork><!-- 如果没有该项配置，肯呢个devtools不会起作用，即应用不会restart -->
+                </configuration>
+            </plugin>
+        </plugins>
+    </build>
+</project>
+```
+
+#### 修改启动类
+
+```java
+package com.daodaofun;
+
+import org.springframework.boot.SpringApplication;
+import org.springframework.boot.autoconfigure.SpringBootApplication;
+import org.springframework.boot.web.servlet.support.SpringBootServletInitializer;
+import org.springframework.context.annotation.PropertySource;
+
+
+@SpringBootApplication
+@PropertySource("WEB-INF/application.properties")
+public class HelloWorldApplication  extends SpringBootServletInitializer{
+
+    public static void main(String[] args) {
+        SpringApplication.run(HelloWorldApplication.class,args);
+    }
+
+
+
+}
+
+```
+
+项目结构如下：
+
+![1528013291585](images/1528013291585.png)
+
+接着
+
+mvn clean
+
+mvn install
+
+
+
+![1528009701965](images/1528009701965.png)
 
 
 
 
 
+我们丢到tomcat里面来试试，注意要8.5哦。
 
+访问成功。
 
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
+![1528013415118](images/1528013415118.png)
 
 
 
