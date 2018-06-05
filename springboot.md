@@ -1,3 +1,5 @@
+
+
 # 道一道Spring Boot
 
 ## Spring Boot简介
@@ -747,7 +749,7 @@ java -jar springboot01-helloword-1.0-SNAPSHOT.jar
 
 
 
-### tomcat去哪了
+### war形式
 
 对于SpringBoot而言，它已经帮助我们内置嵌入了Tomcat，所以我们无需关心这个问题了。
 
@@ -873,6 +875,289 @@ mvn install
 访问成功。
 
 ![1528013415118](images/1528013415118.png)
+
+
+
+# Init简化项目创建
+
+对于idea而言，其实可以通过spring提供的Initializer快速创建项目
+
+看图憋说话；
+
+![1528208837613](images/1528208837613.png)
+
+
+
+前提必须要有网络哦
+
+![1528208886529](images/1528208886529.png)
+
+
+
+![1528208922160](images/1528208922160.png)
+
+> >
+>
+> ![1528208953897](images/1528208953897.png)
+
+
+
+![1528208971296](images/1528208971296.png)
+
+
+
+![1528208992110](images/1528208992110.png)
+
+
+
+![1528209225129](images/1528209225129.png)
+
+
+
+
+
+## 项目结构如下图
+
+![1528209314246](images/1528209314246.png)
+
+
+
+对于下面的一些东西可以删除
+
+- mvnw
+- mvnw.cmd
+- .gitignore
+
+
+
+## 修改两个文件夹
+
+### 设置Java为源文件根路径
+
+![1528209407916](images/1528209407916.png)
+
+
+
+### 设置resources为资源根路径
+
+![1528209470833](images/1528209470833.png)
+
+这个过程会去下载很多依赖，慢慢等哦。
+
+
+
+2018年6月5日22:45:02，有点无聊，来首歌提提神
+
+-------
+
+
+
+一生所爱
+
+```xml
+從前現在過去了再不來
+紅紅落葉長埋塵土內
+開始終結總是沒變改
+天邊的你飄泊白雲外
+苦海翻起愛恨
+在世間難逃避命運
+相親竟不可接近
+或我應該相信是緣份
+情人別後永遠再不來(消散的情緣)
+無言獨坐放眼塵世岸(願來日再續)
+鮮花雖會凋謝(只願)但會再開(為你)
+一生所愛隱約(守候)在白雲外(期待)
+```
+
+
+
+```java
+package com.daodaofun;
+
+import org.springframework.boot.SpringApplication;
+import org.springframework.boot.autoconfigure.SpringBootApplication;
+
+@SpringBootApplication
+public class DemoApplication {
+
+    public static void main(String[] args) {
+        SpringApplication.run(DemoApplication.class, args);
+    }
+}
+
+```
+
+###  特殊文件夹的说明
+
+![1528210886805](images/1528210886805.png)
+
+
+
+- static:放置静态资源
+- templates:放置模板，注意springboot不支持JSP哦，推荐使用模板技术，比如freemaker,或者官方推荐的thymeleaf
+
+
+
+另外还有一个application.properties文件，这个是用于指定一些配置信息的，以上的这些名字或者文件夹名称都是约定俗成，千万不可随意的更改。
+
+### 关于springboot的plugin下载不下来的解决方案
+
+肯定是有文件没有down完，清理一下即可。
+
+
+
+### 编写一个RestController测试
+
+```java
+
+package com.daodaofun.controller;
+
+
+import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RestController;
+
+@RestController
+public class HelloRestController {
+
+
+    @RequestMapping("/hello")
+    public  String hello() {
+
+        return "Hello Baby";
+    }
+}
+
+```
+
+
+
+
+
+
+
+运行，我们测试一下
+
+启动
+
+![1528212495359](images/1528212495359.png)
+
+
+
+访问
+
+![1528212532928](images/1528212532928.png)
+
+这就成功啦
+
+![img](images/000E36CB.jpg) 
+
+![1528212781311](images/1528212781311.png)
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 
 
 
